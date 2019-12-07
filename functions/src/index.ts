@@ -13,13 +13,17 @@ exports.tweets = functions.https.onCall(async body => {
     });
     const params = { q: body.q, count: 10 };
     return await new Promise((resolve, reject) => {
-      client.get("search/tweets", params, (error, tweets, response) => {
-        if (!error) {
-          return resolve(tweets);
-        } else {
-          return reject(error);
+      client.get(
+        "search/tweets",
+        params,
+        (error: string, tweets: string, response: string) => {
+          if (!error) {
+            return resolve(tweets);
+          } else {
+            return reject(error);
+          }
         }
-      });
+      );
     });
   } catch (e) {
     console.error(e);
